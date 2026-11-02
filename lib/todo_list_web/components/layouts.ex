@@ -35,40 +35,57 @@ defmodule TodoListWeb.Layouts do
 
   def app(assigns) do
     ~H"""
-    <header class="navbar px-4 sm:px-6 lg:px-8">
-      <div class="flex-1">
-        <a href="/" class="flex-1 flex w-fit items-center gap-2">
-          <img src={~p"/images/logo.svg"} width="36" />
-          <span class="text-sm font-semibold">v{Application.spec(:phoenix, :vsn)}</span>
-        </a>
-      </div>
-      <div class="flex-none">
-        <ul class="flex flex-column px-1 space-x-4 items-center">
-          <li>
-            <a href="https://phoenixframework.org/" class="btn btn-ghost">Website</a>
-          </li>
-          <li>
-            <a href="https://github.com/phoenixframework/phoenix" class="btn btn-ghost">GitHub</a>
-          </li>
-          <li>
-            <.theme_toggle />
-          </li>
-          <li>
-            <a href="https://phoenix.hexdocs.pm/overview.html" class="btn btn-primary">
-              Get Started <span aria-hidden="true">&rarr;</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </header>
+    <div class="flex min-h-screen flex-col bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+      <header class="relative z-10 border-b border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
+        <div class="mx-auto flex min-h-16 w-full max-w-none items-center justify-between gap-3 px-3 py-2 sm:px-5 lg:px-8">
+          <.link navigate={~p"/todos"} class="flex min-w-0 items-center gap-2.5">
+            <span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-sm">
+              <.icon name="hero-clipboard-document-list" class="size-6" />
+            </span>
 
-    <main class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl space-y-4">
-        {render_slot(@inner_block)}
-      </div>
-    </main>
+            <span class="min-w-0">
+              <span class="block truncate text-base font-bold tracking-tight text-slate-900 dark:text-slate-100 sm:text-lg">
+                 Todo List
+              
+              </span>
+              <span class="hidden text-xs text-slate-500 dark:text-slate-400 sm:block">
+                Organize your day
+              </span>
+            </span>
+          </.link>
 
-    <.flash_group flash={@flash} />
+          <nav class="flex shrink-0 items-center gap-1 sm:gap-2">
+            <.link
+              navigate={~p"/todos"}
+              class="rounded-lg px-2.5 py-2 text-sm font-semibold text-slate-600 transition hover:bg-indigo-50 hover:text-indigo-700 sm:px-3"
+            >
+              <.icon name="hero-home" class="inline size-4 sm:mr-1" />
+              <span class="hidden sm:inline">Tasks</span>
+            </.link>
+
+            <.link
+              navigate={~p"/todos/new"}
+              class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:px-4"
+            >
+              <.icon name="hero-plus" class="size-4" />
+              <span>New Task</span>
+            </.link>
+
+            <div class="hidden sm:block">
+              <.theme_toggle />
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <main class="w-full min-w-0 flex-1 px-2 py-3 sm:px-4 sm:py-4 lg:px-6">
+        <div class="mx-auto w-full min-w-0 max-w-none">
+          {render_slot(@inner_block)}
+        </div>
+      </main>
+
+      <.flash_group flash={@flash} />
+    </div>
     """
   end
 

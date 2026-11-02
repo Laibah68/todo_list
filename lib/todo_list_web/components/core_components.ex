@@ -242,7 +242,10 @@ defmodule TodoListWeb.CoreComponents do
     ~H"""
     <div class="fieldset mb-2">
       <label for={@id}>
-        <span :if={@label} class="label mb-1">{@label}</span>
+        <span :if={@label} class="label mb-1">
+          {@label}
+          <span :if={@rest[:required]} class="ml-1 text-error" aria-hidden="true">*</span>
+        </span>
         <select
           id={@id}
           name={@name}
@@ -263,7 +266,10 @@ defmodule TodoListWeb.CoreComponents do
     ~H"""
     <div class="fieldset mb-2">
       <label for={@id}>
-        <span :if={@label} class="label mb-1">{@label}</span>
+        <span :if={@label} class="label mb-1">
+          {@label}
+          <span :if={@rest[:required]} class="ml-1 text-error" aria-hidden="true">*</span>
+        </span>
         <textarea
           id={@id}
           name={@name}
@@ -284,7 +290,10 @@ defmodule TodoListWeb.CoreComponents do
     ~H"""
     <div class="fieldset mb-2">
       <label for={@id}>
-        <span :if={@label} class="label mb-1">{@label}</span>
+        <span :if={@label} class="label mb-1">
+          {@label}
+          <span :if={@rest[:required]} class="ml-1 text-error" aria-hidden="true">*</span>
+        </span>
         <input
           type={@type}
           name={@name}
